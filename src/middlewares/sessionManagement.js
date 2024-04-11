@@ -8,7 +8,7 @@ module.exports.sessionTrackMiddleware = async (req, res, next) => {
 
     try {
         let action = req.path;
-        action = action.slice(1);
+        action = action.slice(8);
 
         if (action !== "add" && action !== "update") {
             console.log(action)
