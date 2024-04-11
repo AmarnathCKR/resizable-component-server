@@ -69,10 +69,10 @@ module.exports.updateItem = async (req, res) => {
 
 module.exports.getCount = async (req, res) => {
   try {
-    console.time("getCount");
+    console.time("getCountVal");
     const addCount = await Session.find({action : "add"});
     const updateCount = await Session.find({action : "update"});
-    console.time("getCount");
+    console.time("getCountVal");
     res.send({addCount, updateCount })
   } catch (err) {
     res.status(500).json({ error: err })
