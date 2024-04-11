@@ -54,8 +54,8 @@ app.use("/api/v1/", mainRouter)
 
 const PORT = process.env.PORT || 8443;
 
-const server = https.createServer(options, app);
 
-server.listen(PORT, function () {
+
+app.listen(PORT, function () {
     console.log(`Server is running on port ${PORT}`);
 });
