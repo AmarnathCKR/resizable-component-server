@@ -10,7 +10,7 @@ module.exports.getAllComponentItems = async (req, res) => {
     const componentOne = await ComponentOne.find({});
     const componentTwo = await ComponentTwo.find({});
     const componentThree = await ComponentThree.find({});
-    console.time("get-all");
+    console.timeEnd("get-all");
     res.send({ componentOne: componentOne ? componentOne : null, componentTwo: componentTwo ? componentTwo : null, componentThree: componentThree ? componentThree : null })
   } catch (err) {
     res.status(500).json({ error: err })
@@ -34,7 +34,7 @@ module.exports.addItems = async (req, res) => {
       const newItem = new ComponentThree({ value });
       await newItem.save()
     }
-    console.time("add");
+    console.timeEnd("add");
     res.send("success")
 
   } catch (err) {
@@ -59,7 +59,7 @@ module.exports.updateItem = async (req, res) => {
       const newItem = await ComponentThree.findByIdAndUpdate(itemId, { $set: { value } });
 
     }
-    console.time("update");
+    console.timeEnd("update");
     res.send("success")
 
   } catch (err) {
@@ -72,7 +72,7 @@ module.exports.getCount = async (req, res) => {
     console.time("getCountVal");
     const addCount = await Session.find({action : "add"});
     const updateCount = await Session.find({action : "update"});
-    console.time("getCountVal");
+    console.timeEnd("getCountVal");
     res.send({addCount, updateCount })
   } catch (err) {
     res.status(500).json({ error: err })
