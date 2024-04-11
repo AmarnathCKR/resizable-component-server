@@ -1,6 +1,7 @@
 const ComponentOne = require("../database/componentOne");
 const ComponentThree = require("../database/componentThree");
 const ComponentTwo = require("../database/componentTwo");
+const Session = require("../database/sessionShema");
 
 
 module.exports.getAllComponentItems = async (req, res) => {
@@ -57,6 +58,18 @@ module.exports.updateItem = async (req, res) => {
 
     res.send("success")
 
+  } catch (err) {
+    res.status(500).json({ error: err })
+  }
+};
+
+module.exports.getCount = async (req, res) => {
+  try {
+    
+    const addCount = await Session.find({action : "add"});
+    const updateCount = await Session.find({action : "update"});
+
+    res.send({addCount, updateCount })
   } catch (err) {
     res.status(500).json({ error: err })
   }
