@@ -39,7 +39,7 @@ app.use(
 
 app.use(
     cors({
-        origin: ["http://localhost:3000", "https://testing-frontend.netlify.app"],
+        origin: ["http://localhost:3000", "https://resizable-component-amarnathckr.netlify.app"],
         methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
         credentials: true,
     })
