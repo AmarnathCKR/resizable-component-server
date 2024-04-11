@@ -6,9 +6,11 @@ const Session = require("../database/sessionShema");
 
 module.exports.getAllComponentItems = async (req, res) => {
   try {
+    console.time("get-all");
     const componentOne = await ComponentOne.find({});
     const componentTwo = await ComponentTwo.find({});
     const componentThree = await ComponentThree.find({});
+    console.time("get-all");
     res.send({ componentOne: componentOne ? componentOne : null, componentTwo: componentTwo ? componentTwo : null, componentThree: componentThree ? componentThree : null })
   } catch (err) {
     res.status(500).json({ error: err })
@@ -17,6 +19,7 @@ module.exports.getAllComponentItems = async (req, res) => {
 
 module.exports.addItems = async (req, res) => {
   try {
+    console.time("add");
     const { value, componentId } = req.body;
 
     if (!value || !componentId) return res.status(404).json({ error: "Invalid input" });
@@ -31,7 +34,7 @@ module.exports.addItems = async (req, res) => {
       const newItem = new ComponentThree({ value });
       await newItem.save()
     }
-
+    console.time("add");
     res.send("success")
 
   } catch (err) {
@@ -41,6 +44,7 @@ module.exports.addItems = async (req, res) => {
 
 module.exports.updateItem = async (req, res) => {
   try {
+    console.time("update");
     const { value, componentId, itemId } = req.body;
 
     if (!value || !componentId || !itemId) return res.status(404).json({ error: "Invalid input" });
@@ -55,7 +59,7 @@ module.exports.updateItem = async (req, res) => {
       const newItem = await ComponentThree.findByIdAndUpdate(itemId, { $set: { value } });
 
     }
-
+    console.time("update");
     res.send("success")
 
   } catch (err) {
@@ -65,10 +69,10 @@ module.exports.updateItem = async (req, res) => {
 
 module.exports.getCount = async (req, res) => {
   try {
-    
+    console.time("getCount");
     const addCount = await Session.find({action : "add"});
     const updateCount = await Session.find({action : "update"});
-
+    console.time("getCount");
     res.send({addCount, updateCount })
   } catch (err) {
     res.status(500).json({ error: err })
